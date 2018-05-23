@@ -1,0 +1,28 @@
+.ui.fixed.menu+.ui.grid{
+    padding-top:5.75rem !important;
+    padding-bottom: 30px !important;
+    
+  }
+  .ui container{
+    -webkit-box-shadow: 0 8px 6px -6px gray !important;
+    -moz-box-shadow: 0 8px 6px -6px gray !important;
+     box-shadow: 0 8px 6px -6px gray !important;
+  }
+  .ui.fixed.menu, .ui[class*="top fixed"].menu
+  {
+    height: 85px;
+    -webkit-box-shadow: 0 8px 6px -6px gray !important;
+    -moz-box-shadow: 0 8px 6px -6px gray !important;
+     box-shadow: 0 8px 6px -6px gray !important;
+  }
+  .imgtopMargin{
+    margin-top:20px; 
+    height: 45px;
+    width: 45px;
+  }
+  .appname{
+    font-size: 35px;
+    margin: 35px 20px;
+    font-weight: bold;
+    color: white
+  }
