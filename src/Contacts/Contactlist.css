@@ -3,3 +3,7 @@
     max-height: 450px;
     overflow-y: auto;
 }
+.left{
+    text-align: left;
+    cursor: pointer;
+}
