@@ -19,6 +19,12 @@ First, you need to install two packages at a global level and then you need to i
 * yarn global add concurrently
 * yarn install
 
+## Run
+To run the app in local you need to hit the below mentioned command.
+```
+npm run dev
+```
+
 ## Authors
 
 * **Dhaval Patel** - [Dhaval8087](https://github.com/Dhaval8087)

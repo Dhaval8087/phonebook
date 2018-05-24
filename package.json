@@ -17,7 +17,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "mix":"concurrently --kill-others \"npm start\" \"json-server --watch db.json --port 3004\"",
+    "dev":"concurrently --kill-others \"npm start\" \"json-server --watch db.json --port 3004\"",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
