@@ -10,12 +10,12 @@ export default class Search extends Component {
                 <div className="KPDM">
                   
                         <div className="KPKM">
-                            <Input icon='search' placeholder='Search...' />
+                            <Input icon='search' placeholder='Search...' onChange={this.props.onSearch}/>
                         </div>
                         <div className="KPCM">
                             <div className="KPPM">
                                 <div className="KPGL">
-                                    <Image className="KPGL" alt="newContact" src={add} />
+                                    <Image className="KPGL" alt="newContact" src={add} onClick={this.props.onAdd} />
                                 </div>
                             </div>
                         </div>

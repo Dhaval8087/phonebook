@@ -1,45 +1,72 @@
 import React, { Component } from 'react';
-import { Image, List, Segment,Button,Icon } from 'semantic-ui-react';
+import { Image, List, Segment, Button, Icon } from 'semantic-ui-react';
+import ContactStore from '../Stores/ContactStore';
+import ContactDetailStore from '../Stores/ContactDetailStore';
 import './Contactlist.css';
+import Spinner from '../Spinner';
+var defaultAvatar = require('../assets/images/default-userAvatar.png');
+
 export default class Contactlist extends Component {
-    LoadRecord = () => {
-        var tar = [];
-        for (let index = 0; index < 3; index++) {
-            var test = (
-                <List.Item className="left" onClick={this.onItemClick}>
-                    <List.Content floated='right' verticalAlign='middle'>
-                        <Icon  name='delete' color='red' id={index} onClick={this.onDeleteContact} />
-                    </List.Content>
-                    <Image id={index} avatar src='https://react.semantic-ui.com/assets/images/avatar/small/daniel.jpg' />
-                    <List.Content>
-                        <List.Header>Helen</List.Header>
-                        9427857321
-              </List.Content>
-                </List.Item>
-            )
-            tar.push(test);
+    constructor() {
+        super();
+        this.state = {
+            contacts: [],
+            isLoad: false
+        };
+    }
+    componentDidCatch(error, info) {
+        console.log(error);
+     }
+    onChange = () => {
+        this.setState({ contacts: ContactStore.getContacts(), isLoad: false });
+    }
+    componentDidMount() {
+        ContactStore.addChangeListener(this.onChange);
+        this.setState({ isLoad: true });
+        ContactStore.getAllContacts();
+    }
+    componentWillUnmount() {
+        ContactStore.removeChangeListener(this.onChange);
+    }
+    LoadItems = () => {
+        if (typeof this.state != "undefined" && this.state != null) {
+            var items = this.state.contacts.map(function (item, index) {
+                if (item.id != 0) {
+                    return (
+                        <List.Item className="left" onClick={this.props.onItemClick}>
+                            <List.Content floated='right' verticalAlign='middle'>
+                                <Icon name='delete' color='red' id={item.id} onClick={this.onDeleteContact} />
+                            </List.Content>
+                            <Image id={item.id} avatar src={defaultAvatar} className="avatarimage" />
+                            <List.Content>
+                                <List.Header>{item.name}</List.Header>
+                                <span className="number">{item.number}</span>
+                            </List.Content>
+                        </List.Item>
+                    )
+                }
+
+            }.bind(this));
+            return items;
         }
-        return tar;
+        else {
+            return null;
+        }
     }
-    onItemClick = (e, data) => {
+    onDeleteContact = (e) => {
         e.stopPropagation();
-        console.log("Item Click");
-        var dd = data.children[1];
-        console.log(dd.props.id);
-    }
-    onDeleteContact=(e)=>{
-        console.log("delete called");
-        e.stopPropagation();
-        console.log(e.target.id);
+        ContactStore.deleteContact(e.target.id);
     }
     render() {
         return (
-            <Segment className="contactlist">
-                <List animated divided verticalAlign='middle' size="massive" onItemClick={this.onItemClick}>
-                    {this.LoadRecord()}
-                </List>
-            </Segment>
-
+            <Spinner isLoad={this.state.isLoad}>
+                {typeof this.state != "undefined" && this.state != null && this.state.contacts.length > 0 ?
+                    <Segment className="contactlist">
+                        <List animated divided verticalAlign='middle' size="massive">
+                            {this.LoadItems()}
+                        </List>
+                    </Segment> : null}
+            </Spinner>
         )
     }
 }
