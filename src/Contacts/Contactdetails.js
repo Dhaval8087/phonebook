@@ -32,7 +32,7 @@ export default class Contactdetails extends Component {
         }
     }
     componentDidCatch(error, info) {
-       console.log(error);
+        console.log(error);
     }
     componentDidMount() {
         this.setState({
@@ -84,6 +84,9 @@ export default class Contactdetails extends Component {
     clear() {
         this.setState({ name: '', number: '', email: '' });
     }
+    onDiscard = () => {
+        this.clear();
+    }
     render() {
         return (
             <Spinner isLoad={this.state.isLoad}>
@@ -112,6 +115,7 @@ export default class Contactdetails extends Component {
                     <Divider hidden />
                     <Container textAlign="right" >
                         <Button primary onClick={this.onSave} className="savebtn">Save</Button>
+                        {this.props.isAdd ? <Button onClick={this.onDiscard} className="savebtn">Discard</Button> : null}
                     </Container>
                 </Segment>
             </Spinner>
