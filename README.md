@@ -15,6 +15,7 @@ your local machine should have nodejs and npm installed.
 
 First, you need to install two packages at a global level and then you need to install all dependencies using the third command so you need to perform the below-mentioned command.
 
+* npm install -g yarn
 * yarn global add json-server
 * yarn global add concurrently
 * yarn install
